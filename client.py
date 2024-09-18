@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 # Load environment variables
 load_dotenv()
 
-# Server URL configuration
+# Server URL configuration - meanwhile it will be local
 SERVER_URL = os.getenv('SERVER_URL', 'http://localhost:5000')
 MESSAGE_ENDPOINT = f'{SERVER_URL}/api/message'
 STATUS_ENDPOINT = f'{SERVER_URL}/status'

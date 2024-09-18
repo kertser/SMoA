@@ -1,0 +1,14 @@
+/tmp/
+
+# Ignore .env file containing sensitive information
+.env
+
+# Other common files to ignore
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+*.log
