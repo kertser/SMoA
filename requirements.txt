@@ -1,0 +1,7 @@
+openai
+langchain
+aiocache
+sqlalchemy
+langchain_community
+flask
+requests
