@@ -3,5 +3,7 @@ langchain
 aiocache
 sqlalchemy
 langchain_community
-flask
+#flask
+flask[async]
+httpx
 requests
