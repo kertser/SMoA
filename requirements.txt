@@ -3,7 +3,8 @@ langchain
 aiocache
 sqlalchemy
 langchain_community
-#flask
 flask[async]
 httpx
 requests
+sentence_transformers
+colorlog

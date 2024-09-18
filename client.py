@@ -1,25 +1,43 @@
 import requests
+import time
 
-# The server's URL
-SERVER_URL = 'http://localhost:5000/api/message'
+# Серверный URL
+SERVER_URL = 'http://localhost:5000'
+MESSAGE_ENDPOINT = f'{SERVER_URL}/api/message'
+STATUS_ENDPOINT = f'{SERVER_URL}/status'
 
+def check_server_status(timeout=30, interval=1):
+    """Проверяет состояние сервера в течение заданного таймаута."""
+    start_time = time.time()
+    while time.time() - start_time < timeout:
+        try:
+            response = requests.get(STATUS_ENDPOINT)
+            if response.status_code == 200:
+                data = response.json()
+                if data.get('status') == 'ready':
+                    print("Сервер готов к работе.")
+                    return True
+        except requests.ConnectionError:
+            pass
+        print("Ожидание готовности сервера...")
+        time.sleep(interval)
+    print("Сервер не ответил в течение заданного времени.")
+    return False
 
 def send_message(message):
-    # Prepare the payload
     payload = {'message': message}
-
-    # Send the POST request to the server API
-    response = requests.post(SERVER_URL, json=payload)
+    response = requests.post(MESSAGE_ENDPOINT, json=payload)
 
     if response.status_code == 200:
-        # Extract the assistant's response
         data = response.json()
-        assistant_reply = data.get('response', '')
-        print(f"Assistant: {assistant_reply}")
+        print(f"Assistant: {data['response']}")
     else:
         print(f"Request failed with status code {response.status_code}")
 
-
 if __name__ == '__main__':
-    user_message = input("You: ")
-    send_message(user_message)
+    # Проверяем состояние сервера перед отправкой сообщения
+    if check_server_status():
+        user_message = input("You: ")
+        send_message(user_message)
+    else:
+        print("Не удалось установить соединение с сервером.")
