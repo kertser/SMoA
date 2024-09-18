@@ -8,3 +8,4 @@ httpx
 requests
 sentence_transformers
 colorlog
+python-dotenv
