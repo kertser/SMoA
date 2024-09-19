@@ -9,3 +9,11 @@ requests
 sentence_transformers
 colorlog
 python-dotenv
+
+networkx #???
+jaal
+matplotlib
+
+dash
+dash-bootstrap-components
+dash-cytoscape
